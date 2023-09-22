@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
  * @since 2023-09-22, Friday
  **/
 @Repository
-public interface BlogRepo extends JpaRepository<Blog,Long> {
+public interface BlogRepo extends JpaRepository<Blog, Long> {
 
 }
