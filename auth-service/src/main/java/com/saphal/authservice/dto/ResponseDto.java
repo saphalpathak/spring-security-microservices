@@ -31,13 +31,15 @@ public class ResponseDto {
     public ResponseDto getSuccessResponse(String message, Object data) {
         this.message = message;
         this.data = data;
-        this.status = "Success";
+        this.status = "success";
         return this;
     }
 
-    public void getErrorResponse(String message) {
-
+    public ResponseDto getErrorResponse(String message) {
+        this.status = "error";
         this.message = message;
+
+        return this;
 
     }
 
