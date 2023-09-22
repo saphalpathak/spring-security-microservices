@@ -1,6 +1,6 @@
 package com.saphal.blogservice.service;
 
-import com.saphal.blogservice.calls.AuthServiceClient;
+import com.saphal.blogservice.client.AuthServiceClient;
 import com.saphal.blogservice.dto.BlogDto;
 import com.saphal.blogservice.dto.UserDto;
 import com.saphal.blogservice.entity.Blog;
@@ -33,9 +33,9 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogDto saveBlog(BlogDto blogDto) {
 
-        ResponseEntity<UserDto> addressByEmployeeId = authServiceClient.getAddressByEmployeeId(blogDto.getAuthor());
-        if (addressByEmployeeId.getStatusCode() != HttpStatusCode.valueOf(200)) {
-            throw new ResourceNotFoundException(Objects.requireNonNull(addressByEmployeeId.getBody()).getMessage());
+        ResponseEntity<UserDto> user = authServiceClient.getUserByUserId(blogDto.getAuthor());
+        if (user.getStatusCode() != HttpStatusCode.valueOf(200)) {
+            throw new ResourceNotFoundException(Objects.requireNonNull(user.getBody()).getMessage());
         }
         Blog blog = BlogMapper.mapDtoToEntity(blogDto);
         blogRepo.save(blog);

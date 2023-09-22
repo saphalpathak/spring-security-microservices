@@ -1,4 +1,4 @@
-package com.saphal.blogservice.calls;
+package com.saphal.blogservice.client;
 
 import com.saphal.blogservice.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,6 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface AuthServiceClient {
 
     @GetMapping("/api/v1/user/{id}")
-    ResponseEntity<UserDto> getAddressByEmployeeId(@PathVariable("id") Long id);
+    ResponseEntity<UserDto> getUserByUserId(@PathVariable("id") Long id);
 
 }
