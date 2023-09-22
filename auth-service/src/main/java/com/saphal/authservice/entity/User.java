@@ -1,9 +1,14 @@
 package com.saphal.authservice.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -31,12 +36,18 @@ public class User {
 
     private String fullName;
 
+    @Column(unique = true)
     private String phoneNumber;
 
     private String address;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_role", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_role_id"))
+    private Role role;
 
 }

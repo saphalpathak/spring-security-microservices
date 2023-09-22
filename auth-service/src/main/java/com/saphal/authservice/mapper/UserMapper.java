@@ -1,6 +1,8 @@
 package com.saphal.authservice.mapper;
 
+import com.saphal.authservice.dto.RoleDto;
 import com.saphal.authservice.dto.UserDto;
+import com.saphal.authservice.entity.Role;
 import com.saphal.authservice.entity.User;
 
 /**
@@ -23,12 +25,14 @@ public class UserMapper {
     }
 
     public static UserDto mapEntityToDto(User user) {
+        Role role = user.getRole();
         return new UserDto()
                 .setId(user.getId())
                 .setEmail(user.getEmail())
                 .setAddress(user.getAddress())
                 .setPassword(user.getPassword())
                 .setFullName(user.getFullName())
-                .setPhoneNumber(user.getPhoneNumber());
+                .setPhoneNumber(user.getPhoneNumber())
+                .setRole(new RoleDto(role.getId(), role.getName(), role.getDescription()));
     }
 }

@@ -1,9 +1,11 @@
 package com.saphal.authservice.service;
 
 import com.saphal.authservice.dto.UserDto;
+import com.saphal.authservice.entity.Role;
 import com.saphal.authservice.entity.User;
 import com.saphal.authservice.exception.ResourceNotFoundException;
 import com.saphal.authservice.mapper.UserMapper;
+import com.saphal.authservice.repo.RoleRepo;
 import com.saphal.authservice.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,10 +24,15 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
 
     @Override
     public UserDto saveUser(UserDto userDto) {
+        Role role = roleRepo.findById(userDto.getRoleId()).orElseThrow(
+                () -> new ResourceNotFoundException("Role not found.")
+        );
         User user = UserMapper.mapDtoToEntity(userDto);
+        user.setRole(role);
         userRepo.save(user);
         return UserMapper.mapEntityToDto(user);
     }

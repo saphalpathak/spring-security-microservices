@@ -1,7 +1,6 @@
 package com.saphal.authservice.service;
 
 import com.saphal.authservice.dto.UserDto;
-import com.saphal.authservice.entity.User;
 
 import java.util.List;
 

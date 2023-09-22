@@ -1,6 +1,6 @@
 package com.saphal.authservice.repo;
 
-import com.saphal.authservice.entity.User;
+import com.saphal.authservice.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  * @since 2023-09-22, Friday
  **/
 @Repository
-public interface UserRepo extends JpaRepository<User, Long> {
+public interface RoleRepo extends JpaRepository<Role, Integer> {
 }
