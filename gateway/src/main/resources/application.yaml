@@ -23,7 +23,7 @@ spring:
             - StripPrefix=1
 
         - id: blog-service
-          uri: lb://auth-service
+          uri: lb://blog-service
           predicates:
             - Path=/blog/**
           filters:
