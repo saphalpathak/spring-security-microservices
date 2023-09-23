@@ -27,6 +27,7 @@ import java.util.List;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepo userRepo;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findUserByEmail(username).orElseThrow(
@@ -34,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         );
         Role role = user.getRole();
         List<GrantedAuthority> simpleGrantedAuthorities = Collections.singletonList(
-                new SimpleGrantedAuthority(role.getName()));
-        return new org.springframework.security.core.userdetails.User(username, user.getPassword(),simpleGrantedAuthorities);
+                new SimpleGrantedAuthority("ROLE_".concat(role.getName())));
+        return new org.springframework.security.core.userdetails.User(username, user.getPassword(), simpleGrantedAuthorities);
     }
 }

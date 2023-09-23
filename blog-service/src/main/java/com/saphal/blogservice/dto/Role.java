@@ -6,15 +6,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Role{
+public class Role {
 
-	@JsonProperty("name")
-	private String name;
+    @JsonProperty("name")
+    private String name;
 
-	@JsonProperty("description")
-	private String description;
+    @JsonProperty("description")
+    private String description;
 
-	@JsonProperty("id")
-	private int id;
+    @JsonProperty("id")
+    private int id;
 
 }

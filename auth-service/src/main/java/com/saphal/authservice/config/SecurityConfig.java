@@ -3,7 +3,6 @@ package com.saphal.authservice.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -28,14 +27,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(registry -> registry.requestMatchers("/api/v1/login").permitAll())
-                .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/api/v1/user/**", "/api/v1/role/**").hasAuthority("ADMIN");
-                })
-                .authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST,
-                        "/api/v1/blog/**").hasAuthority("USER"))
-                .authorizeHttpRequests(request -> request.anyRequest().authenticated())
+                .authorizeHttpRequests(registry ->
+                        registry.requestMatchers("/api/v1/user/login").permitAll()
+                                .requestMatchers("/api/v1/user/**", "/api/v1/user/", "/api/v1/role/",
+                                        "/api/v1/role/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)

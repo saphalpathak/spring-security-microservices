@@ -6,27 +6,27 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Data{
+public class Data {
 
-	@JsonProperty("password")
-	private String password;
+    @JsonProperty("password")
+    private String password;
 
-	@JsonProperty("phoneNumber")
-	private String phoneNumber;
+    @JsonProperty("phoneNumber")
+    private String phoneNumber;
 
-	@JsonProperty("address")
-	private String address;
+    @JsonProperty("address")
+    private String address;
 
-	@JsonProperty("role")
-	private Role role;
+    @JsonProperty("role")
+    private Role role;
 
-	@JsonProperty("fullName")
-	private String fullName;
+    @JsonProperty("fullName")
+    private String fullName;
 
-	@JsonProperty("id")
-	private int id;
+    @JsonProperty("id")
+    private int id;
 
-	@JsonProperty("email")
-	private String email;
+    @JsonProperty("email")
+    private String email;
 
 }

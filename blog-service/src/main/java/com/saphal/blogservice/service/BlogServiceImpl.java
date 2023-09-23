@@ -31,9 +31,9 @@ public class BlogServiceImpl implements BlogService {
     private final AuthServiceClient authServiceClient;
 
     @Override
-    public BlogDto saveBlog(BlogDto blogDto) {
+    public BlogDto saveBlog(BlogDto blogDto, String token) {
 
-        ResponseEntity<UserDto> user = authServiceClient.getUserByUserId(blogDto.getAuthor());
+        ResponseEntity<UserDto> user = authServiceClient.getUserByUserId(blogDto.getAuthor(), token);
         if (user.getStatusCode() != HttpStatusCode.valueOf(200)) {
             throw new ResourceNotFoundException(Objects.requireNonNull(user.getBody()).getMessage());
         }

@@ -36,7 +36,7 @@ public class ResponseDto {
     }
 
     public ResponseDto getErrorResponse(String message) {
-        this.status="error";
+        this.status = "error";
         this.message = message;
         return this;
 

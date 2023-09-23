@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2023-09-22, Friday
  **/
 public interface BlogService {
-    BlogDto saveBlog(BlogDto blogDto);
+    BlogDto saveBlog(BlogDto blogDto, String token);
 
     BlogDto updateBlog(BlogDto blogDto);
 

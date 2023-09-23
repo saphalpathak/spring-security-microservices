@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,21 +22,26 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/login")
+@RequestMapping("/api/v1/user")
 public class LoginController {
 
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<ResponseDto> loginUser(@RequestBody LoginRequestDto loginRequestDto) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginRequestDto.getEmail(), loginRequestDto.getPassword()
         ));
-            return ResponseEntity.ok(
-                    new ResponseDto().getSuccessResponse("Login successful",
-                            jwtUtil.generateToken(loginRequestDto.getEmail()))
-            );
+        return ResponseEntity.ok(
+                new ResponseDto().getSuccessResponse("Login successful",
+                        jwtUtil.generateToken(loginRequestDto.getEmail()))
+        );
+    }
+
+    @GetMapping("/validate")
+    public boolean validateToken() {
+        return true;
     }
 }

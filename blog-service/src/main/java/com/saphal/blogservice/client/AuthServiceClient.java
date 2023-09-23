@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 /**
  * @author Saphal Pathak
@@ -17,6 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface AuthServiceClient {
 
     @GetMapping("/api/v1/user/{id}")
-    ResponseEntity<UserDto> getUserByUserId(@PathVariable("id") Long id);
+    ResponseEntity<UserDto> getUserByUserId(@PathVariable("id") Long id, @RequestHeader("Authorization") String token);
 
 }
