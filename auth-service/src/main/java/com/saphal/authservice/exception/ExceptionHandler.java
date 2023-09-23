@@ -3,6 +3,8 @@ package com.saphal.authservice.exception;
 import com.saphal.authservice.dto.ResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
@@ -20,6 +22,14 @@ public class ExceptionHandler {
         return new ResponseEntity<>(
                 new ResponseDto().getErrorResponse(resourceNotFoundException.getMessage()),
                 HttpStatus.NOT_FOUND
+        );
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler
+    public ResponseEntity<ResponseDto> handleUsernameNotFoundException(BadCredentialsException badCredentialsException) {
+        return new ResponseEntity<>(
+                new ResponseDto().getErrorResponse("Invalid Username or Password!!"),
+                HttpStatus.BAD_REQUEST
         );
     }
 

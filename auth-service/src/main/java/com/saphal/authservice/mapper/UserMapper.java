@@ -19,7 +19,6 @@ public class UserMapper {
                 .setId(userDto.getId())
                 .setEmail(userDto.getEmail())
                 .setAddress(userDto.getAddress())
-                .setPassword(userDto.getPassword())
                 .setFullName(userDto.getFullName())
                 .setPhoneNumber(userDto.getPhoneNumber());
     }
@@ -30,7 +29,6 @@ public class UserMapper {
                 .setId(user.getId())
                 .setEmail(user.getEmail())
                 .setAddress(user.getAddress())
-                .setPassword(user.getPassword())
                 .setFullName(user.getFullName())
                 .setPhoneNumber(user.getPhoneNumber())
                 .setRole(new RoleDto(role.getId(), role.getName(), role.getDescription()));

@@ -8,6 +8,7 @@ import com.saphal.authservice.mapper.UserMapper;
 import com.saphal.authservice.repo.RoleRepo;
 import com.saphal.authservice.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDto saveUser(UserDto userDto) {
@@ -32,6 +34,7 @@ public class UserServiceImpl implements UserService {
                 () -> new ResourceNotFoundException("Role not found.")
         );
         User user = UserMapper.mapDtoToEntity(userDto);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole(role);
         userRepo.save(user);
         return UserMapper.mapEntityToDto(user);
@@ -45,7 +48,7 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(userDto.getPhoneNumber())
                 .setEmail(userDto.getEmail())
                 .setAddress(userDto.getAddress())
-                .setPassword(userDto.getPassword())
+                .setPassword(passwordEncoder.encode(userDto.getPassword()))
                 .setFullName(userDto.getFullName());
         userRepo.save(user);
         return UserMapper.mapEntityToDto(user);

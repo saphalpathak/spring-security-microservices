@@ -1,4 +1,4 @@
-package com.saphal.blogservice.mapper;
+package com.saphal.blogservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
